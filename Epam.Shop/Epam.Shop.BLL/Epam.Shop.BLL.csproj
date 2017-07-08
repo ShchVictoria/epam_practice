@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AuthLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +51,10 @@
     <ProjectReference Include="..\Epam.Shop.DAL.DB\Epam.Shop.DAL.DB.csproj">
       <Project>{0974c357-77a9-4c95-877d-2ef67d778679}</Project>
       <Name>Epam.Shop.DAL.DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.Shop.DALInterface\Epam.Shop.DALInterface.csproj">
+      <Project>{bad84204-ae57-4664-a9f1-834b2fd35a03}</Project>
+      <Name>Epam.Shop.DALInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Epam.Shop.Entities\Epam.Shop.Entities.csproj">
       <Project>{80f376a7-5989-4b43-a043-a57d228ccfc1}</Project>
