@@ -23,10 +23,11 @@ namespace Epam.Shop.DAL.DB
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("INSERT INTO [dbo].[User] (Id, Login, Password, Name, SecondName, Email) VALUES (@Id, @Login, @Password, @Name, @SecondName, @Email)", connection);
+                SqlCommand command = new SqlCommand("INSERT INTO [dbo].[User] (Id, Login, Password, IdRole, Name, SecondName, Email) VALUES (@Id, @Login, @Password, @IdRole, @Name, @SecondName, @Email)", connection);
                 command.Parameters.AddWithValue("@Id", user.Id);
                 command.Parameters.AddWithValue("@Login", user.Login);
                 command.Parameters.AddWithValue("@Password", user.Password);
+                command.Parameters.AddWithValue("@IdRole", user.IdRole);
                 command.Parameters.AddWithValue("@Name", user.Name);
                 command.Parameters.AddWithValue("@SecondName", user.SecondName);
                 command.Parameters.AddWithValue("@Email", user.Email);

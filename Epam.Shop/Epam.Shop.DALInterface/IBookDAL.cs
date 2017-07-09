@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Epam.Shop.DALInterface
 {
-    public interface IBook
+    public interface IBookDAL
     {
         bool DeleteBook(Guid BookId);
 

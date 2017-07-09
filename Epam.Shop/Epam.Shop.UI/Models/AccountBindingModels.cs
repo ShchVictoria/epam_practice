@@ -35,6 +35,10 @@ namespace Epam.Shop.UI.Models
     public class RegisterBindingModel
     {
         [Required]
+        [Display(Name = "Логин")]
+        public string Login { get; set; }
+
+        [Required]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
 
@@ -48,6 +52,19 @@ namespace Epam.Shop.UI.Models
         [Display(Name = "Подтверждение пароля")]
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Имя")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Фамилия")]
+        public string SecondName { get; set; }
+
+        internal bool Register()
+        {
+            return DataProvider.logic.AddUser(Login, Password, Name, SecondName, Email);
+        }
     }
 
     public class RegisterExternalBindingModel

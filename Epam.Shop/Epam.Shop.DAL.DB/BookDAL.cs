@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace Epam.Shop.DAL.DB
 {
-    public class BookDAL : IBook
+    public class BookDAL : IBookDAL
     {
         public string ConnectionString;
 
@@ -36,7 +36,13 @@ namespace Epam.Shop.DAL.DB
 
         public bool DeleteBook(Guid BookId)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("DELETE FROM [dbo].[Book] WHERE [Id]=@Id", connection);
+                command.Parameters.AddWithValue("@Id", BookId);
+                connection.Open();
+                return command.ExecuteNonQuery() == 1;
+            }
         }
 
         public IEnumerable<Book> GetAllBooks(Guid Id)
