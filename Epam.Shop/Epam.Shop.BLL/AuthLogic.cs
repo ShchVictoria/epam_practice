@@ -30,23 +30,40 @@ namespace Epam.Shop.BLL
                 bytes[i] = Convert.ToByte(password[i]);
             }
             var hash = systemHash.ComputeHash(bytes);
-            User newUser = new User() { Id = Guid.NewGuid(), Login = login, Password = hash, Name = name, SecondName = secondName, Email = email, IdRole = Guid.NewGuid() /*this.GetIdRole("User")*/ };
+            User newUser = new User() { Id = Guid.NewGuid(), Login = login, Password = hash, Name = name, SecondName = secondName, Email = email, IdRole = GetRoleId("User") };
             return dal.Add(newUser);
         }
 
-        public User Get(string login)
+        public IEnumerable<string> GetAllRoles()
         {
-            return dal.Get(login);
+            return dal.GetAllRoles();
         }
 
-        public Guid GetIdRole(string name)
+        public IEnumerable<string> GetRole(string login)
         {
-            return dal.GetIdRole(name);
+            return dal.GetRole(login).ToArray();
+        }
+
+        public Guid GetRoleId(string name)
+        {
+            return dal.GetRoleId(name);
+        }
+
+        public bool TryLogin(string login, string password)
+        {
+            byte[] bytes = new byte[password.Length];
+            for (int i = 0; i < password.Length; i++)
+            {
+                bytes[i] = Convert.ToByte(password[i]);
+            }
+            var hash = systemHash.ComputeHash(bytes);
+            var user = dal.GetByLogin(login);
+            return user.Password.ToString() == hash.ToString();
         }
 
         public bool UserExists(string login)
         {
-            var user = dal.Get(login);
+            var user = dal.GetByLogin(login);
             return user != null;
         }
     }

@@ -17,13 +17,39 @@ namespace Epam.Shop.UI.Controllers
         }
 
         [HttpGet]
+        public ActionResult LogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LogIn(AuthUserVM model, string ReturnUrl)
+        {
+            if (AuthUserVM.LogIn(model))
+            {
+                if (ReturnUrl != null && ReturnUrl != "")
+                {
+                    return Redirect(ReturnUrl);
+                }
+                return RedirectToAction("Index", "Profile");
+            }
+            return View(model);
+        }
+
+        public ActionResult LogOut()
+        {
+            AuthUserVM.LogOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
         public ActionResult Registration()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Registration(RegisterBindingModel model)
+        public ActionResult Registration(RegistrationVM model)
         {
             if (ModelState.IsValid)
             {
@@ -36,13 +62,18 @@ namespace Epam.Shop.UI.Controllers
                 {
                     if (model.Register())
                     {
-                        var account = AdapterController.CheckUser(model.Login);
-                        FormsAuthentication.SetAuthCookie(account.Login, true);
-                        return RedirectToAction("Index", "Home");
+                        FormsAuthentication.SetAuthCookie(model.Login, true);
+                        return RedirectToAction("Index", "Profile");
                     }
                 }
             }
             return View();
+        }
+
+        public JsonResult IsLoginValid(string value)
+        {
+            bool result = RegistrationVM.IsLoginValid(value);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

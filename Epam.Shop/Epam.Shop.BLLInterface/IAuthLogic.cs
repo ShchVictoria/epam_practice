@@ -11,10 +11,14 @@ namespace Epam.Shop.BLLInterface
     {
         bool AddUser(string login, string password, string name, string secondName, string email);
 
-        User Get(string login);
+        bool TryLogin(string login, string password);
 
         bool UserExists(string login);
 
-        Guid GetIdRole(string name);
+        IEnumerable<string> GetRole(string login);
+
+        IEnumerable<String> GetAllRoles();
+
+        Guid GetRoleId(string name);
     }
 }

@@ -14,13 +14,12 @@ namespace Epam.Shop.Entities
 
         public byte[] Password { get; set; }
 
+        public Guid IdRole { get; set; }
+
         public string Name { get; set; }
 
         public string SecondName { get; set; }
 
         public string Email { get; set; }
-
-        public Guid IdRole { get; set; }
-
     }
 }

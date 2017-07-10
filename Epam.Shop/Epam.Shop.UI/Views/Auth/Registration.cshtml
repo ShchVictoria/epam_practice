@@ -1,4 +1,4 @@
-﻿@model Epam.Shop.UI.Models.RegisterBindingModel
+﻿@model Epam.Shop.UI.Models.RegistrationVM
 
 @{
     ViewBag.Title = "Registration";
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>RegisterBindingModel</h4>
+        <h4>RegistrationVM</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

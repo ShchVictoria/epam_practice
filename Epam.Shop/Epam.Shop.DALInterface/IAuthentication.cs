@@ -11,8 +11,12 @@ namespace Epam.Shop.DALInterface
     {
         bool Add(User user);
 
-        User Get(string login);
+        User GetByLogin(string login);
 
-        Guid GetIdRole(string name);
+        IEnumerable<string> GetRole(string login);
+
+        IEnumerable<string> GetAllRoles();
+
+        Guid GetRoleId(string name);
     }
 }
