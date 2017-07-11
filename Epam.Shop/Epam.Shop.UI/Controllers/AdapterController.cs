@@ -19,14 +19,14 @@ namespace Epam.Shop.UI.Controllers
             return View();
         }
 
-        //public static User CheckUser(string login)
-        //{
-        //    if (logic.Get(login) != null)
-        //    {
-        //        return logic.Get(login);
-        //    }
-        //    return null;
-        //}
+        public static User GetUser(string login)
+        {
+            if (logic.GetByLogin(login) != null)
+            {
+                return logic.GetByLogin(login);
+            }
+            return null;
+        }
 
         public static bool Get(string login)
         {

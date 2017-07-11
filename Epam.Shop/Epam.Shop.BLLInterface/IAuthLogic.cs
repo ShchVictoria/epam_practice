@@ -15,6 +15,8 @@ namespace Epam.Shop.BLLInterface
 
         bool UserExists(string login);
 
+        User GetByLogin(string login);
+
         IEnumerable<string> GetRole(string login);
 
         IEnumerable<String> GetAllRoles();

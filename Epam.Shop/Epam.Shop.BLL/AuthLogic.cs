@@ -39,6 +39,11 @@ namespace Epam.Shop.BLL
             return dal.GetAllRoles();
         }
 
+        public User GetByLogin(string login)
+        {
+            return dal.GetByLogin(login);
+        }
+
         public IEnumerable<string> GetRole(string login)
         {
             return dal.GetRole(login).ToArray();

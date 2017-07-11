@@ -18,7 +18,7 @@ namespace Epam.Shop.UI.Models
 
             if (result)
             {
-                FormsAuthentication.SetAuthCookie(model.Login, false);
+                FormsAuthentication.SetAuthCookie(model.Login, true);
                 return true;
             }
             return false;

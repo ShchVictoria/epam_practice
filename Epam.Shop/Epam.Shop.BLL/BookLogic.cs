@@ -21,6 +21,7 @@ namespace Epam.Shop.BLL
 
         public bool AddBook(Book book)
         {
+            book.Id = Guid.NewGuid();
             return dal.AddBook(book);
         }
 

@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdapterController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuthUserVM.cs" />
+    <Compile Include="Models\BookVM.cs" />
     <Compile Include="Models\DataProvider.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ProfileVM.cs" />
@@ -287,6 +289,8 @@
     <Content Include="Views\Auth\LogIn.cshtml" />
     <Content Include="Views\Auth\Registration.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Book\Add.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
