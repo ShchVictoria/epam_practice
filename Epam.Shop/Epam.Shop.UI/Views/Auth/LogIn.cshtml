@@ -7,7 +7,7 @@
 <h2>LogIn</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("LogIn", "Auth", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     

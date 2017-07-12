@@ -7,7 +7,7 @@
 <h2>Registration</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Registration", "Auth", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     

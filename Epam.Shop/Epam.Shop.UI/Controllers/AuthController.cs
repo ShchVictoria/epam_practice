@@ -23,12 +23,13 @@ namespace Epam.Shop.UI.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult LogIn(AuthUserVM model, string ReturnUrl)
         {
-            if (AuthUserVM.LogIn(model))
+            var user = AdapterController.GetUser(model.Login);
+            if (user != null && AuthUserVM.LogIn(model))
             {
-                var user = AdapterController.GetUser(model.Login);
-                FormsAuthentication.SetAuthCookie(user.Login, true);
+                FormsAuthentication.SetAuthCookie(user.Name, true);
 
                 if (ReturnUrl != null && ReturnUrl != "")
                 {
