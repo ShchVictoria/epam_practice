@@ -29,7 +29,7 @@ namespace Epam.Shop.UI.Controllers
             var user = AdapterController.GetUser(model.Login);
             if (user != null && AuthUserVM.LogIn(model))
             {
-                FormsAuthentication.SetAuthCookie(user.Name, true);
+                FormsAuthentication.RedirectFromLoginPage(user.Name, true);
 
                 if (ReturnUrl != null && ReturnUrl != "")
                 {
