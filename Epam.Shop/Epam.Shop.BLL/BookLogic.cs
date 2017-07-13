@@ -30,14 +30,19 @@ namespace Epam.Shop.BLL
             return dal.DeleteBook(BookId);
         }
 
-        public IEnumerable<Book> GetAllBooks(Guid Id)
+        public IEnumerable<Book> GetAllBooks()
         {
-            return dal.GetAllBooks(Id);
+            return dal.GetAllBooks();
         }
 
         public Book GetBook(string name)
         {
             return dal.GetBook(name);
+        }
+
+        public Book GetById(Guid id)
+        {
+            return dal.GetById(id);
         }
     }
 }

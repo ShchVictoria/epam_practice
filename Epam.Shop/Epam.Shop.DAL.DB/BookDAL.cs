@@ -45,9 +45,25 @@ namespace Epam.Shop.DAL.DB
             }
         }
 
-        public IEnumerable<Book> GetAllBooks(Guid Id)
+        public IEnumerable<Book> GetAllBooks()
         {
-            return new List<Book>();
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("SELECT [Id], [Title], [Author], [Year], [Price] FROM [dbo].[Book]", connection);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    yield return new Book()
+                    {
+                        Id = (Guid)reader["Id"],
+                        Title = (string)reader["Title"],
+                        Author = (string)reader["Author"],
+                        Year = (int)reader["Year"],
+                        Price = (int)reader["Price"]
+                    };
+                }
+            }
         }
 
         public Book GetBook(string title)
@@ -56,6 +72,29 @@ namespace Epam.Shop.DAL.DB
             {
                 SqlCommand command = new SqlCommand("SELECT [Id], [Title], [Author], [Year], [Price] FROM[dbo].[Book] WHERE [Title]=@Title", connection);
                 command.Parameters.AddWithValue("@Title", title);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    return new Book()
+                    {
+                        Id = (Guid)reader["Id"],
+                        Title = (string)reader["Title"],
+                        Author = (string)reader["Author"],
+                        Year = (int)reader["Year"],
+                        Price = (int)reader["Price"]
+                    };
+                }
+                return null;
+            }
+        }
+
+        public Book GetById(Guid id)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("SELECT [Id], [Title], [Author], [Year], [Price] FROM[dbo].[Book] WHERE [Id]=@Id", connection);
+                command.Parameters.AddWithValue("@Id", id);
                 connection.Open();
                 var reader = command.ExecuteReader();
                 while (reader.Read())

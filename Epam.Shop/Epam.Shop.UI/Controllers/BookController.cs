@@ -12,11 +12,10 @@ namespace Epam.Shop.UI.Controllers
 {
     public class BookController : Controller
     {
-        private static IBook bll = new BookLogic();
         // GET: Book
         public ActionResult Index()
         {
-            return View();
+            return View(BookVM.GetAll());
         }
 
         [HttpGet]
@@ -30,11 +29,16 @@ namespace Epam.Shop.UI.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var book = new Book() { Title = model.Title, Author = model.Author, Year = model.Year, Price = model.Price };
-                var result = bll.AddBook(book);
+                //var book = new Book() { Title = model.Title, Author = model.Author, Year = model.Year, Price = model.Price };
+                var result = BookVM.Add(model);
                 return RedirectToAction("Index", "Book");
             }
             return RedirectToAction("LogIn", "Auth");
+        }
+        
+        public ActionResult Details(Guid id)
+        {
+            return View(BookVM.Get(id));
         }
     }
 }

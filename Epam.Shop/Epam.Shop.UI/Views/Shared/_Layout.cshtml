@@ -22,8 +22,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Вход", "LogIn", "Auth", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Регистрация", "Registration", "Auth", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Товары", "Index", "Book", new { area = "" }, null)</li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Профиль", "Index", "Profile", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Товары", "Index", "Book", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Выход", "LogOut", "Auth", new { area = "" }, null)</li>
+                    }
                 </ul>
             </div>
         </div>

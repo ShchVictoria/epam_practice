@@ -10,5 +10,7 @@ namespace Epam.Shop.UI.Models
     public class DataProvider
     {
         public static IAuthLogic logic = new AuthLogic();
+
+        public static IBook logicBook = new BookLogic();
     }
 }
