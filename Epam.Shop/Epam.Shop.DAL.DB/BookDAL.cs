@@ -23,13 +23,14 @@ namespace Epam.Shop.DAL.DB
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("INSERT INTO [dbo].[Book] (Id, Title, Author, Year, Price) VALUES (@Id, @Title, @Author, @Year, @Price)", connection);
+                SqlCommand command = new SqlCommand("AddBook", connection);
+                connection.Open();
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Id", book.Id);
                 command.Parameters.AddWithValue("@Title", book.Title);
                 command.Parameters.AddWithValue("@Author", book.Author);
                 command.Parameters.AddWithValue("@Year", book.Year);
                 command.Parameters.AddWithValue("@Price", book.Price);
-                connection.Open();
                 return command.ExecuteNonQuery() == 1;
             }
         }
@@ -38,8 +39,9 @@ namespace Epam.Shop.DAL.DB
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("DELETE FROM [dbo].[Book] WHERE [Id]=@Id", connection);
+                SqlCommand command = new SqlCommand("Delete", connection);
                 command.Parameters.AddWithValue("@Id", BookId);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 connection.Open();
                 return command.ExecuteNonQuery() == 1;
             }
@@ -49,7 +51,8 @@ namespace Epam.Shop.DAL.DB
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("SELECT [Id], [Title], [Author], [Year], [Price] FROM [dbo].[Book]", connection);
+                SqlCommand command = new SqlCommand("GetAll", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 connection.Open();
                 var reader = command.ExecuteReader();
                 while (reader.Read())
@@ -70,8 +73,9 @@ namespace Epam.Shop.DAL.DB
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("SELECT [Id], [Title], [Author], [Year], [Price] FROM[dbo].[Book] WHERE [Title]=@Title", connection);
+                SqlCommand command = new SqlCommand("GetBook", connection);
                 command.Parameters.AddWithValue("@Title", title);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 connection.Open();
                 var reader = command.ExecuteReader();
                 while (reader.Read())
@@ -93,8 +97,9 @@ namespace Epam.Shop.DAL.DB
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("SELECT [Id], [Title], [Author], [Year], [Price] FROM[dbo].[Book] WHERE [Id]=@Id", connection);
+                SqlCommand command = new SqlCommand("GetBookById", connection);
                 command.Parameters.AddWithValue("@Id", id);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 connection.Open();
                 var reader = command.ExecuteReader();
                 while (reader.Read())
@@ -109,6 +114,22 @@ namespace Epam.Shop.DAL.DB
                     };
                 }
                 return null;
+            }
+        }
+
+        public bool Update(Book book)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("UpdatePrice", connection);
+                command.Parameters.AddWithValue("@Id", book.Id);
+                command.Parameters.AddWithValue("@Title", book.Title);
+                command.Parameters.AddWithValue("@Author", book.Author);
+                command.Parameters.AddWithValue("@Year", book.Year);
+                command.Parameters.AddWithValue("@Price", book.Price);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                connection.Open();
+                return command.ExecuteNonQuery() == 1;
             }
         }
     }

@@ -44,5 +44,10 @@ namespace Epam.Shop.BLL
         {
             return dal.GetById(id);
         }
+
+        public bool Update(Book book)
+        {
+            return dal.Update(book);
+        }
     }
 }

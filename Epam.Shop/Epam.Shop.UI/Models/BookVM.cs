@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Epam.Shop.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -63,6 +64,19 @@ namespace Epam.Shop.UI.Models
                 Year = result.Year,
                 Price = result.Price
             };
+        }
+
+        public static bool Update(BookVM model)
+        {
+            var result = DataProvider.logicBook.Update(new Book()
+            {
+                Id = model.Id,
+                Title = model.Title,
+                Author = model.Author,
+                Year = model.Year,
+                Price = model.Price
+            });
+            return result;
         }
     }
 }

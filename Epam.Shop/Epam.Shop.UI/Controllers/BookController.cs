@@ -17,7 +17,7 @@ namespace Epam.Shop.UI.Controllers
         {
             return View(BookVM.GetAll());
         }
-
+        
         [HttpGet]
         public ActionResult Add()
         {
@@ -27,18 +27,51 @@ namespace Epam.Shop.UI.Controllers
         [HttpPost]
         public ActionResult Add(BookVM model)
         {
-            if (User.Identity.IsAuthenticated)
+            if (ModelState.IsValid)
             {
-                //var book = new Book() { Title = model.Title, Author = model.Author, Year = model.Year, Price = model.Price };
-                var result = BookVM.Add(model);
-                return RedirectToAction("Index", "Book");
+                if (BookVM.Add(model))
+                {
+                    return RedirectToAction("Index", "Book");
+                }
             }
-            return RedirectToAction("LogIn", "Auth");
+            return View(model);
         }
         
         public ActionResult Details(Guid id)
         {
             return View(BookVM.Get(id));
+        }
+    
+        [HttpGet]
+        public ActionResult Edit(Guid id)
+        {
+            return View(BookVM.Get(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(BookVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (BookVM.Update(model))
+                {
+                    return RedirectToAction("Index", "Book");
+                }
+            }
+            return View(model);
+        }
+        
+        public ActionResult Delete(Guid id)
+        {
+            return View(BookVM.Get(id));
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult ConfirmDelete(Guid id)
+        {
+            BookVM.Delete(id);
+            return RedirectToAction("Index", "Book");
         }
     }
 }

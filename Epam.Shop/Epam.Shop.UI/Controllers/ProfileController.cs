@@ -12,15 +12,12 @@ namespace Epam.Shop.UI.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
+        [Authorize]
         public ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                var user = DataProvider.logic.GetByLogin(User.Identity.Name);
-                ProfileVM profile = new ProfileVM() { Name = user.Name, SecondName = user.SecondName };
-                return View(profile);
-            }
-            return RedirectToAction("Index", "Home");
+            var user = DataProvider.logic.GetByLogin(User.Identity.Name);
+            ProfileVM profile = new ProfileVM() { Name = user.Name, SecondName = user.SecondName };
+            return View(profile);
         }
     }
 }

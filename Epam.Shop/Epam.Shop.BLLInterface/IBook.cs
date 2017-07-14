@@ -18,5 +18,7 @@ namespace Epam.Shop.BLLInterface
         Book GetById(Guid id);
 
         IEnumerable<Book> GetAllBooks();
+
+        bool Update(Book book);
     }
 }
