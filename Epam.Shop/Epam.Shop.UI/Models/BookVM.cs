@@ -78,5 +78,18 @@ namespace Epam.Shop.UI.Models
             });
             return result;
         }
+
+        public static BookVM Search(string name)
+        {
+            var result = DataProvider.logicBook.GetBook(name);
+            return new BookVM()
+            {
+                Id = result.Id,
+                Title = result.Title,
+                Author = result.Author,
+                Year = result.Year,
+                Price = result.Price
+            };
+        }
     }
 }

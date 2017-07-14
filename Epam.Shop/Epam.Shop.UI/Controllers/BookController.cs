@@ -73,5 +73,16 @@ namespace Epam.Shop.UI.Controllers
             BookVM.Delete(id);
             return RedirectToAction("Index", "Book");
         }
+        
+        public ActionResult Search(string tag)
+        {
+            if (tag == null)
+            {
+                return RedirectToAction("Index", "Book");
+            }
+
+            var book = BookVM.Search(tag);
+            return RedirectToAction("Details", new { id = book.Id});
+        }
     }
 }

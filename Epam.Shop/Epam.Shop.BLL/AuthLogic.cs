@@ -30,7 +30,16 @@ namespace Epam.Shop.BLL
                 bytes[i] = Convert.ToByte(password[i]);
             }
             var hash = systemHash.ComputeHash(bytes);
-            User newUser = new User() { Id = Guid.NewGuid(), Login = login, Password = hash, Name = name, SecondName = secondName, Email = email, IdRole = GetRoleId("User") };
+            User newUser = new User()
+            {
+                Id = Guid.NewGuid(),
+                Login = login,
+                Password = hash,
+                Name = name,
+                SecondName = secondName,
+                Email = email,
+                IdRole = Guid.NewGuid() //временное значение для роли
+            };
             return dal.Add(newUser);
         }
 
