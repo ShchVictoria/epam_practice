@@ -1,15 +1,12 @@
 ﻿using Epam.Shop.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.Shop.BLLInterface
 {
     public interface IAuthLogic
     {
-        bool AddUser(string login, string password, string name, string secondName, string email);
+        bool AddUser(string login, string password, string name, string secondName, string email, int role);
 
         bool TryLogin(string login, string password);
 

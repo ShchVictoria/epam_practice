@@ -22,7 +22,7 @@ namespace Epam.Shop.BLL
             systemHash = SHA256.Create();
         }
 
-        public bool AddUser(string login, string password, string name, string secondName, string email)
+        public bool AddUser(string login, string password, string name, string secondName, string email, int role)
         {
             byte[] bytes = new byte[password.Length];
             for (int i = 0; i < password.Length; i++)
@@ -30,6 +30,7 @@ namespace Epam.Shop.BLL
                 bytes[i] = Convert.ToByte(password[i]);
             }
             var hash = systemHash.ComputeHash(bytes);
+            
             User newUser = new User()
             {
                 Id = Guid.NewGuid(),
@@ -38,7 +39,7 @@ namespace Epam.Shop.BLL
                 Name = name,
                 SecondName = secondName,
                 Email = email,
-                IdRole = 2
+                IdRole = role
             };
             return dal.Add(newUser);
         }

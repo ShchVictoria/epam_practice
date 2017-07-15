@@ -46,5 +46,10 @@ namespace Epam.Shop.UI.Controllers
         {
             return logic.GetAllRoles();
         }
+
+        public static void CreateAdmin(string login, string password, string email)
+        {
+            logic.AddUser(login, password, login, login, email, 1);
+        }
     }
 }

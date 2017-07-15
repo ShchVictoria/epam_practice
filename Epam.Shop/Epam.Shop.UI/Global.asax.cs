@@ -18,6 +18,12 @@ namespace Epam.Shop.UI
         {
             AdapterController.Init();
             RolesConfig.Init();
+            var adminLogin = ConfigurationManager.AppSettings.GetValues("AdminDefault").FirstOrDefault();
+            var adminPassword = ConfigurationManager.AppSettings.GetValues("AdminDefaultPassword").FirstOrDefault();
+            if (AdapterController.GetUser(adminLogin) == null)
+            {
+                AdapterController.CreateAdmin(adminLogin, adminPassword, "admin@gmail.com");
+            }
             AreaRegistration.RegisterAllAreas();
             //GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

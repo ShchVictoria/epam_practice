@@ -39,7 +39,7 @@ namespace Epam.Shop.UI.Models
 
         internal bool Register()
         {
-            return DataProvider.logic.AddUser(Login, Password, Name, SecondName, Email);
+            return DataProvider.logic.AddUser(Login, Password, Name, SecondName, Email, 2);
         }
 
         internal static bool IsLoginValid(string value)
