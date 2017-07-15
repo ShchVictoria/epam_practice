@@ -21,6 +21,8 @@ namespace Epam.Shop.BLLInterface
 
         IEnumerable<String> GetAllRoles();
 
-        Guid GetRoleId(string name);
+        int GetRoleId(string name);
+
+        int RegisterRoles();
     }
 }

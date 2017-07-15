@@ -17,6 +17,8 @@ namespace Epam.Shop.DALInterface
 
         IEnumerable<string> GetAllRoles();
 
-        Guid GetRoleId(string name);
+        int GetRoleId(string name);
+
+        int RegisterRoles();
     }
 }

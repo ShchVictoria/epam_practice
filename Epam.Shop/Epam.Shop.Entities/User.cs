@@ -14,7 +14,7 @@ namespace Epam.Shop.Entities
 
         public byte[] Password { get; set; }
 
-        public Guid IdRole { get; set; }
+        public int IdRole { get; set; }
 
         public string Name { get; set; }
 

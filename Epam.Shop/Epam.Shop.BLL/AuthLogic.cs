@@ -38,7 +38,7 @@ namespace Epam.Shop.BLL
                 Name = name,
                 SecondName = secondName,
                 Email = email,
-                IdRole = Guid.NewGuid() //временное значение для роли
+                IdRole = 2
             };
             return dal.Add(newUser);
         }
@@ -58,9 +58,14 @@ namespace Epam.Shop.BLL
             return dal.GetRole(login).ToArray();
         }
 
-        public Guid GetRoleId(string name)
+        public int GetRoleId(string name)
         {
             return dal.GetRoleId(name);
+        }
+
+        public int RegisterRoles()
+        {
+            return dal.RegisterRoles();
         }
 
         public bool TryLogin(string login, string password)

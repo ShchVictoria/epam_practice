@@ -90,7 +90,7 @@ namespace Epam.Shop.DAL.DB
                         Id = (Guid)reader["Id"],
                         Login = (string)reader["Login"],
                         Password = (byte[])reader["Password"],
-                        IdRole = (Guid)reader["IdRole"],
+                        IdRole = (int)reader["IdRole"],
                         Name = (string)reader["Name"],
                         SecondName = (string)reader["SecondName"],
                         Email = (string)reader["Email"]
@@ -115,7 +115,7 @@ namespace Epam.Shop.DAL.DB
             }
         }
 
-        public Guid GetRoleId(string name)
+        public int GetRoleId(string name)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -125,9 +125,20 @@ namespace Epam.Shop.DAL.DB
                 var reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    return (Guid)reader["Id"];
+                    return (int)reader["Id"];
                 }
                 throw new ArgumentException("Incorrect role name");
+            }
+        }
+
+        public int RegisterRoles()
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("AddRoles", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                connection.Open();
+                return command.ExecuteNonQuery();
             }
         }
     }

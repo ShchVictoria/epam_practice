@@ -11,12 +11,12 @@ namespace Epam.Shop.UI.Controllers
 {
     public class AdapterController : Controller
     {
-        private static IAuthLogic logic = new AuthLogic();
+        private static IAuthLogic logic;
 
-        // GET: Adapter
-        public ActionResult Index()
+        public static void Init()
         {
-            return View();
+            if (logic == null)
+                logic = new AuthLogic();
         }
 
         public static User GetUser(string login)
@@ -28,6 +28,11 @@ namespace Epam.Shop.UI.Controllers
             return null;
         }
 
+        public static void RegisterRoles()
+        {
+            logic.RegisterRoles();
+        }
+
         public static bool Get(string login)
         {
             if (logic.UserExists(login))
@@ -35,6 +40,11 @@ namespace Epam.Shop.UI.Controllers
                 return true; // логин занят
             }
             return false; //можно использовать
+        }
+
+        public static IEnumerable<string> GetAllRoles()
+        {
+            return logic.GetAllRoles();
         }
     }
 }
